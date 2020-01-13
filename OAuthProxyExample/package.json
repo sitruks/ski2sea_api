@@ -1,5 +1,5 @@
 {
-  "name": "SkiToSea_RaceResults",
+  "name": "ski_to_sea_race_results",
   "description": "This is a Tableau Web Data Connector for annual Ski to Sea Race Results API",
   "version": "0.0.1",
   "author": "Kurtis Santillanes",

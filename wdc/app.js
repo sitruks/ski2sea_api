@@ -7,7 +7,7 @@ var querystring = require('querystring');
 var http = require('http');
 var request = require('request');
 var path = require('path');
-var config = require('./config.js.js');              // Get our config info (app id and app secret)
+var config = require('./config.js.js.js');              // Get our config info (app id and app secret)
 var cors = require('cors')
 var sys = require('util');
 

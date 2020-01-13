@@ -1,6 +1,7 @@
 # Tableau Web Data Connector with a JSON API using Ski to Sea Race Data  
 
-## SDMX-JSON WDC Example
+## Node Express App WDC Example
+
     This is my first run at building a Tableau WDC. For this example, I chose to connect to the Ski to Sea API, referenced below.
 
     The files are divided between local (dev) and production folders. The live connector is hosted via the 'prod' folder, but can access it here:

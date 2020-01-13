@@ -1,8 +1,8 @@
 {
-  "name": "tableau-wdc-foursquare",
-  "description": "This is a sample Tableau Web Data Connector for the Foursquare API",
+  "name": "Ski to Sea Race Results",
+  "description": "This is a Tableau Web Data Connector for annual Ski to Sea Race Results API",
   "version": "0.0.1",
-  "author": "YOUR_NAME_HERE",
+  "author": "Kurtis Santillanes",
   "contributors": [],
   "license": "MIT",
   "repository": "",

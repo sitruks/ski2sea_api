@@ -1,0 +1,52 @@
+{
+  "connections" : [
+    {
+      "alias" : "Results By Leg",
+      "tables" : [
+        { "id"    : "results",
+          "alias" : "Results" },
+        { "id"    : "divisions",
+          "alias" : "Divisions" },
+        { "id"    : "legs",
+          "alias" : "Legs" },
+        { "id"    : "teams",
+          "alias" : "Teams" }
+      ],
+      "joins" : [
+        {
+          "left" : {
+            "tableAlias" : "Results",
+            "columnId"   : "leg"
+          },
+          "right" : {
+            "tableAlias" : "Legs",
+            "columnId"   : "code"
+          },
+          "joinType" : "inner"
+        },
+        {
+          "left" : {
+            "tableAlias" : "Results",
+            "columnId"   : "tn"
+          },
+          "right" : {
+            "tableAlias" : "Teams",
+            "columnId"   : "teamId"
+          },
+          "joinType" : "inner"
+        },
+        {
+          "left" : {
+            "tableAlias" : "Teams",
+            "columnId"   : "dc"
+          },
+          "right" : {
+            "tableAlias" : "Divisions",
+            "columnId"   : "divisions"
+          },
+          "joinType" : "inner"
+        }
+      ]
+    }
+  ]
+}

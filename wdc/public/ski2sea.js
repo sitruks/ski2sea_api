@@ -85,29 +85,41 @@
 })();
 
 // Helper function that loads a json and a callback to call once that file is loaded
-function loadJSON(method, url) {
-    var obj = new XMLHttpRequest();
-    if ("withCredentials" in obj) {
-        obj.open(method, url, true);
-    } else if (typeof XDomainRequest != "undefined") {
-        obj = new XDomainRequest();
-        obj.open(method, url);
-    } else {
-        obj = null;
-    }
-    return obj;
-}
+// function loadJSON(method, url) {
+//     var obj = new XMLHttpRequest();
+//     if ("withCredentials" in obj) {
+//         obj.open(method, url, true);
+//     } else if (typeof XDomainRequest != "undefined") {
+//         obj = new XDomainRequest();
+//         obj.open(method, url);
+//     } else {
+//         obj = null;
+//     }
+//     return obj;
+// }
 
-var request = loadJSON("GET", "http://results.skitosea.com/api/v1/2009/results");
-if (request) {
-    request.setRequestHeader("X-My-Custom-Header", "some value");
-    request.onload = function () {
+// var request = loadJSON("GET", "http://results.skitosea.com/api/v1/2009/results");
+// if (request) {
+//     request.setRequestHeader("X-My-Custom-Header", "some value");
+//     request.onload = function () {
+//         if (obj.readyState == 4 && obj.status == "200") {
+//             url(obj.responseText);
+//         }
+//         console.log(request.responseText);
+//     };
+//     request.send();
+// }
+
+function loadJSON(path, cb) {
+    var obj = new XMLHttpRequest();
+    obj.overrideMimeType("application/json");
+    obj.open("GET", "http://results.skitosea.com/api/v1/2009/results", true);
+    obj.onreadystatechange = function () {
         if (obj.readyState == 4 && obj.status == "200") {
-            url(obj.responseText);
+            cb(obj.responseText);
         }
-        console.log(request.responseText);
-    };
-    request.send();
+    }
+    obj.send(null);
 }
 
 function send() {

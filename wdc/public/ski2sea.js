@@ -5,6 +5,7 @@
         $("#getracedata").click(function () {
             tableau.connectionName = "Ski to Sea Race Results Data";
             tableau.submit();
+            console.log("hello line 8");
         });
     });
 
@@ -85,35 +86,16 @@
 })();
 
 // Helper function that loads a json and a callback to call once that file is loaded
-// function loadJSON(method, url) {
-//     var obj = new XMLHttpRequest();
-//     if ("withCredentials" in obj) {
-//         obj.open(method, url, true);
-//     } else if (typeof XDomainRequest != "undefined") {
-//         obj = new XDomainRequest();
-//         obj.open(method, url);
-//     } else {
-//         obj = null;
-//     }
-//     return obj;
-// }
-
-// var request = loadJSON("GET", "http://results.skitosea.com/api/v1/2009/results");
-// if (request) {
-//     request.setRequestHeader("X-My-Custom-Header", "some value");
-//     request.onload = function () {
-//         if (obj.readyState == 4 && obj.status == "200") {
-//             url(obj.responseText);
-//         }
-//         console.log(request.responseText);
-//     };
-//     request.send();
-// }
-
-function loadJSON(path, cb) {
+function loadJSON(path, cb, isLocal) {
     var obj = new XMLHttpRequest();
+    var url = "http://localhost:3333/results";
     obj.overrideMimeType("application/json");
-    obj.open("GET", "http://results.skitosea.com/api/v1/2009/results", true);
+    if (isLocal) {
+        obj.open("GET", "../json/" + path + ".json", true);
+    }
+    else {
+        obj.open("GET", url);
+    }
     obj.onreadystatechange = function () {
         if (obj.readyState == 4 && obj.status == "200") {
             cb(obj.responseText);

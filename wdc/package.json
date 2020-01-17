@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "description": "This is a Tableau Web Data Connector for annual Ski to Sea Race Results API",
   "scripts": {
-    "corsproxy": "export CORSPROXY_PORT=8889 || set CORSPROXY_PORT=8889 && node node_modules/corsproxy/bin/corsproxy",
-    "http-server": "node node_modules/http-server/bin/http-server -p 3333 -c-1",
-    "start": "node app.js node_modules/npm-run-all/bin/npm-run-all --parallel corsproxy http-server"
+    "start": "nodemon app.js"
   },
   "author": "Kurtis Santillanes",
   "contributors": [],
@@ -15,14 +13,15 @@
     "url": "git+https://github.com/sitruks/ski2sea_api"
   },
   "dependencies": {
-    "corsproxy": "^1.4.0",
+    "dotenv": "^6.2.0",
     "express": "^4.17.1",
-    "http-server": "^0.9.0",
     "moment": ">=2.19.3",
-    "npm-run-all": "^2.1.1",
-    "request": ">=2.68.0"
+    "request": "^2.88.0"
   },
   "engines": {
     "node": ">= 0.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }

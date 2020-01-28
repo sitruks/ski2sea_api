@@ -51,15 +51,20 @@
         // so we want to make sure we are getting the correct table data per getData call
         loadJSON(table.tableInfo.id, function (data) {
             var obj = JSON.parse(data);
+            console.log(obj);
+            console.log(obj.divisions);
             var tableData = [];
             // Iterate through the data and build our table
             for (var i = 0; i < obj.length; i++) {
-                tableEntry = {};
+                var tableEntry = {};
                 var ref = obj[i];
                 // We can use this handy shortcut because our JSON column names match our schema's column names perfectly
                 Object.getOwnPropertyNames(ref).forEach(function (val, idx, array) {
                     // Handle specific cases by checking the name of the property
                     switch (val) {
+                        case "divisions":
+                            tableEntry.divisions = ref[val];
+                            break;
                         // case "address":
                         //   tableEntry.lat = ref[val].geo.lat;
                         //   tableEntry.lng = ref[val].geo.lng;
@@ -88,13 +93,14 @@
 // Helper function that loads a json and a callback to call once that file is loaded
 function loadJSON(path, cb, isLocal) {
     var obj = new XMLHttpRequest();
-    var url = "http://localhost:3333/results";
+    // var url = "http://localhost:3333/results";
+    var url = "http://jsonplaceholder.typicode.com/" + path;
     obj.overrideMimeType("application/json");
     if (isLocal) {
         obj.open("GET", "../json/" + path + ".json", true);
     }
     else {
-        obj.open("GET", url);
+        obj.open("GET", url, true);
     }
     obj.onreadystatechange = function () {
         if (obj.readyState == 4 && obj.status == "200") {

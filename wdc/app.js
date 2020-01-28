@@ -1,12 +1,14 @@
 // -------------------------------------------------- //
 // Module Dependencies
 // -------------------------------------------------- //
-var express = require('express');
-var querystring = require('querystring');
-var http = require('http');
-var request = require('request');
-var path = require('path');
+var axios = require('axios');
+var bodyParser = require('body-parser');
 var config = require('./config.js');
+var express = require('express');
+var fs = require('fs');
+var http = require('http');
+var path = require('path');
+var request = require('request');
 var sys = require('util');
 
 var app = express();
@@ -21,6 +23,12 @@ app.use(function (req, res, next) {
   next();
 });
 
+// // method inbuilt in express to recognize the incoming Request Object as a JSON Object
+// app.use(express.json())
+
+// parse application/json, basically parse incoming Request Object as a JSON Object 
+app.use(bodyParser.json());
+
 // -------------------------------------------------- //
 // Routes
 // -------------------------------------------------- //
@@ -29,23 +37,60 @@ app.get('/', function (req, res) {
   res.redirect('/index.html');
 });
 
-app.get('/results', function (req, res) {
+app.get('/output', function (req, res) {
   var url = 'http://results.skitosea.com/api/v1/2009/results';
-  request(url).pipe(res);
-  // res.json(JSON.parse(body));
+  var output = request(url).pipe(res);
 });
 
-// app.get('/results', function (req, res) {
-//   request(
-//     { url: 'http://results.skitosea.com/api/v1/2009/results' },
-//     function (error, response, body) {
-//       if (error || response.statusCode !== 200) {
-//         return res.status(500).json({ type: 'error', message: err.message });
-//       }
+// app.get('/output', function (req, res) {
+//   // var yearsArray = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
+//   var yearsArray = [2009, 2010, 2011];
+//   for (let i = 0; i < yearsArray.length; i++) {
+//     var url = 'http://results.skitosea.com/api/v1/' + yearsArray[i] + '/results';
+//     request(url).pipe(res);
+//   };
+// });
 
-//       res.json(JSON.parse(body));
-//     }
-//   )
+// app.get('/output', function (req, res) {
+//   // var yearsArray = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
+//   var yearsArray = [2010, 2011];
+
+//   for (let i = 0; i < yearsArray.length; i++) {
+//     var url = 'http://results.skitosea.com/api/v1/' + yearsArray[i] + '/results';
+//     request(url).pipe(res);
+//   };
+// });
+
+// app.get('/results', function (req, res) {
+
+//   var options = {
+//     url: 'http://results.skitosea.com/api/v1/2009/results',
+//     method: 'GET',
+//     accept: 'application/json'
+//   };
+
+//   // var path = './public/json/db.json';
+//   // var ws = fs.createWriteStream(path,'utf8');
+//   // var json = JSON.stringify(ws);
+//   // console.log(json);
+
+
+//   // Start the request
+//   request(options).on('error', function (error) {
+//     console.log(error);
+//   }).pipe(res);
+// });
+
+// app.get('/output', function (req, res) {
+//   var options = {
+//     url: 'http://results.skitosea.com/api/v1/2009/results',
+//     method: 'GET',
+//     accept: 'application/json'
+//   };
+//   // Start the request
+//   request(options).on('error', function (error) {
+//     console.log(error);
+//   }).pipe(res);
 // });
 
 // -------------------------------------------------- //

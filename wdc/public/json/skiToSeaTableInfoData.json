@@ -28,7 +28,21 @@
         { "id" : "short_name", "alias" : "Short Name", "dataType" : "string" },
         { "id" : "long_name", "alias" : "Long Name", "dataType" : "string" }
       ]
-    },{
+    },
+    
+    {
+      "id" : "photos",
+      "alias" : "Photos",
+      "columns" : [
+        { "id" : "albumId",      "alias" : "Album ID",     "dataType" : "int"    },
+        { "id" : "id",           "alias" : "ID",           "dataType" : "int"    },
+        { "id" : "title",        "alias" : "Title",        "dataType" : "string" },
+        { "id" : "url",          "alias" : "URL",          "dataType" : "string" },
+        { "id" : "thumbnailUrl", "alias" : "Thumnail URL", "dataType" : "string" }
+      ]
+    },
+    
+    {
       "id" : "teams",
       "alias" : "Teams",
       "columns" : [

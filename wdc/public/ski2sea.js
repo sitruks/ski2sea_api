@@ -13,35 +13,26 @@
     var myConnector = tableau.makeConnector();
 
     // Define the schema
-    myConnector.getSchema = function(schemaCallback) {
+    myConnector.getSchema = function (schemaCallback) {
         // Schema for results data
         var results_cols = [{
-            id: "leg", alias: "Leg",
-            dataType: tableau.dataTypeEnum.string
+            id: "leg", alias: "Leg", dataType: tableau.dataTypeEnum.string
         }, {
-            id: "pa", alias: "Place After",
-            dataType: tableau.dataTypeEnum.float
+            id: "pa", alias: "Place After", dataType: tableau.dataTypeEnum.float
         }, {
-            id: "dq", alias: "DQ or DNF",
-            dataType: tableau.dataTypeEnum.bool
+            id: "dq", alias: "DQ or DNF", dataType: tableau.dataTypeEnum.bool
         }, {
-            id: "tn", alias: "Team Number",
-            dataType: tableau.dataTypeEnum.float
+            id: "tn", alias: "Team Number", dataType: tableau.dataTypeEnum.float
         }, {
-            id: "dr", alias: "Division Place",
-            dataType: tableau.dataTypeEnum.float
+            id: "dr", alias: "Division Place", dataType: tableau.dataTypeEnum.float
         }, {
-            id: "du", alias: "Elapsed Time",
-            dataType: tableau.dataTypeEnum.date
+            id: "du", alias: "Elapsed Time", dataType: tableau.dataTypeEnum.date
         }, {
-            id: "rn", alias: "Leg Place",
-            dataType: tableau.dataTypeEnum.float
+            id: "rn", alias: "Leg Place", dataType: tableau.dataTypeEnum.float
         }, {
-            id: "st", alias: "Start Time",
-            dataType: tableau.dataTypeEnum.date
+            id: "st", alias: "Start Time", dataType: tableau.dataTypeEnum.date
         }, {
-            id: "ed", alias: "End Time",
-            dataType: tableau.dataTypeEnum.date
+            id: "ed", alias: "End Time", dataType: tableau.dataTypeEnum.date
         }];
 
         var resultsTable = {
@@ -50,30 +41,54 @@
 
         // Schema for teams data
         var teams_cols = [{
-            id: "teamId", alias: "Team ID",
-            dataType: tableau.dataTypeEnum.float
+            id: "teamId", alias: "Team ID", dataType: tableau.dataTypeEnum.float
         }, {
-            id: "rs", alias: "Racers",
-            dataType: tableau.dataTypeEnum.string
+            id: "ca1_n", alias: "Canoe 1 Name", dataType: tableau.dataTypeEnum.string
         }, {
-            id: "tn", alias: "Team Name",
-            dataType: tableau.dataTypeEnum.string
+            id: "ca1_g", alias: "Canoe 1 Gender", dataType: tableau.dataTypeEnum.string
         }, {
-            id: "dc", alias: "Division",
-            dataType: tableau.dataTypeEnum.string
+            id: "ca2_n", alias: "Canoe 2 Name", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "ca2_g", alias: "Canoe 2 Gender", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "rb_n", alias: "RD Bike Name", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "rb_g", alias: "RD Bike Gender", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "ru_n", alias: "Run Name", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "ru_g", alias: "Run Gender", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "xc_n", alias: "XC Ski Name", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "xc_g", alias: "XC Ski Gender", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "dh_n", alias: "DH Ski Name", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "dh_g", alias: "DH Ski Gender", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "ka_n", alias: "Kayak Name", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "ka_g", alias: "Kayak Gender", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "mb_n", alias: "XC Bike Name", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "mb_g", alias: "XC Bike Gender", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "tn", alias: "Team Name", dataType: tableau.dataTypeEnum.string
+        }, {
+            id: "dc", alias: "Division", dataType: tableau.dataTypeEnum.string
         }];
 
         var teamsTable = {
             id: "teams", alias: "Teams Data", columns: teams_cols
         };
-        
+
         // Schema for divisions data
         var divisions_cols = [{
-            id: "code", alias: "Code",
-            dataType: tableau.dataTypeEnum.string
+            id: "code", alias: "Code", dataType: tableau.dataTypeEnum.string
         }, {
-            id: "long_name", alias: "Long Name",
-            dataType: tableau.dataTypeEnum.string
+            id: "long_name", alias: "Long Name", dataType: tableau.dataTypeEnum.string
         }];
 
         var divisionsTable = {
@@ -82,29 +97,26 @@
 
         // Schema for legs data
         var legs_cols = [{
-            id: "code", alias: "Code",
-            dataType: tableau.dataTypeEnum.string
+            id: "code", alias: "Code", dataType: tableau.dataTypeEnum.string
         }, {
-            id: "short_name", alias: "Short Name",
-            dataType: tableau.dataTypeEnum.string
+            id: "short_name", alias: "Short Name", dataType: tableau.dataTypeEnum.string
         }, {
-            id: "long_name", alias: "Long Name",
-            dataType: tableau.dataTypeEnum.string
+            id: "long_name", alias: "Long Name", dataType: tableau.dataTypeEnum.string
         }];
 
         var legsTable = {
             id: "legs", alias: "Legs Data", columns: legs_cols
         };
-        
+
         schemaCallback([resultsTable, teamsTable, divisionsTable, legsTable]);
     };
 
     // Download the data
-    myConnector.getData = function(table, doneCallback) {
+    myConnector.getData = function (table, doneCallback) {
         // var yearsArray = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
         var apiCall = "http://localhost:3333/output";
 
-        $.getJSON(apiCall, function(resp) {
+        $.getJSON(apiCall, function (resp) {
             var results = resp.results,
                 teams = resp.teams,
                 divisions = resp.divisions,
@@ -113,29 +125,62 @@
 
             if (table.tableInfo.id == "results") {
                 console.log(results);
-                for (var i = 0, len = results.length; i < len; i++) {
-                    tableData.push({
-                        "leg": results[i],
-                        "pa": results[i].pa,
-                        "dq": results[i].dq,
-                        "tn": results[i].tn,
-                        "dr": results[i].dr,
-                        "du": new Date(results[i].du),  // Convert to a date format from epoch time
-                        "rn": results[i].rn,
-                        "st": new Date(results[i].st),
-                        "ed": new Date(results[i].ed)
-                    });
+                var i, j
+                for (i in results) {
+                    for (j in results[i]) {
+                        tableData.push({
+                            "leg": i,
+                            "pa": results[i][j].pa,
+                            "dq": results[i][j].dq,
+                            "tn": results[i][j].tn,
+                            "dr": results[i][j].dr,
+                            "du": results[i][j].du,
+                            "rn": results[i][j].rn,
+                            "st": results[i][j].st,
+                            "ed": results[i][j].ed
+                        });
+                    }
                 }
             }
             if (table.tableInfo.id == "teams") {
                 console.log(teams);
-                for (var i = 0, len = teams.length; i < len; i++) {
-                    tableData.push({
-                        "teamId": teams[i],
-                        "rs": teams[i].rs[i].n,
-                        "tn": teams[i].tn,
-                        "dc": teams[i].dc
-                    });
+                var i, j;
+                for (i in teams) {
+                    for (j in teams[i].rs.ca) {
+                        for (j in teams[i].rs.rb) {
+                            for (j in teams[i].rs.ru) {
+                                for (j in teams[i].rs.xc) {
+                                    for (j in teams[i].rs.dh) {
+                                        for (j in teams[i].rs.ka) {
+                                            for (j in teams[i].rs.mb) {
+                                                tableData.push({
+                                                    "teamId": i,
+                                                    "tn": teams[i].tn,
+                                                    "dc": teams[i].dc,
+                                                    "ca1_n": teams[i].rs.ca[0].n,
+                                                    "ca1_g": teams[i].rs.ca[0].g,
+                                                    "ca2_n": teams[i].rs.ca[1].n,
+                                                    "ca2_g": teams[i].rs.ca[1].g,
+                                                    "rb_n": teams[i].rs.rb[j].n,
+                                                    "rb_g": teams[i].rs.rb[j].g,
+                                                    "ru_n": teams[i].rs.ru[j].n,
+                                                    "ru_g": teams[i].rs.ru[j].g,
+                                                    "xc_n": teams[i].rs.xc[j].n,
+                                                    "xc_g": teams[i].rs.xc[j].g,
+                                                    "dh_n": teams[i].rs.dh[j].n,
+                                                    "dh_g": teams[i].rs.dh[j].g,
+                                                    "ka_n": teams[i].rs.ka[j].n,
+                                                    "ka_g": teams[i].rs.ka[j].g,
+                                                    "mb_n": teams[i].rs.mb[j].n,
+                                                    "mb_g": teams[i].rs.mb[j].g
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
             if (table.tableInfo.id == "divisions") {
@@ -158,10 +203,10 @@
                     });
                 }
             }
-            
+
             table.appendRows(tableData);
             console.log(tableData);
-            
+
             doneCallback();
         });
     };

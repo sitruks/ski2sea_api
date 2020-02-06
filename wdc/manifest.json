@@ -1,8 +1,0 @@
-{
-    "name": "Ski To Sea Race Results",
-    "short_name": "ski2sea",
-    "theme_color": "#079e99",
-    "background_color": "#fd7f3e",
-    "display": "browser",
-    "permissions": ["http://results.skitosea.com/api/v1/2009/results"]
-}

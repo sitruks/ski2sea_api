@@ -1,15 +1,11 @@
 // -------------------------------------------------- //
 // Module Dependencies
 // -------------------------------------------------- //
-var axios = require('axios');
 var bodyParser = require('body-parser');
 var config = require('./config.js');
 var express = require('express');
-var fs = require('fs');
 var http = require('http');
-var path = require('path');
 var request = require('request');
-var sys = require('util');
 
 var app = express();
 
@@ -22,11 +18,6 @@ app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', process.env.ORIGIN || '*');
   next();
 });
-
-// // method inbuilt in express to recognize the incoming Request Object as a JSON Object
-// app.use(express.json())
-
-// parse application/json, basically parse incoming Request Object as a JSON Object 
 app.use(bodyParser.json());
 
 // -------------------------------------------------- //
@@ -91,59 +82,6 @@ app.get('/2019', function (req, res) {
   var url = 'http://results.skitosea.com/api/v1/2019/results';
   var output = request(url).pipe(res);
 });
-
-// app.get('/:20??', function (req, res) {
-//   // var yearsArray = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
-//   var yearsArray = [2009, 2010, 2011];
-//   for (let i = 0; i < yearsArray.length; i++) {
-//     var url = 'http://results.skitosea.com/api/v1/' + yearsArray[i] + '/results';
-//     request(url).pipe(res);
-//     console.log(res);
-    
-//   };
-// });
-
-// app.get('/output', function (req, res) {
-//   // var yearsArray = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
-//   var yearsArray = [2010, 2011];
-
-//   for (let i = 0; i < yearsArray.length; i++) {
-//     var url = 'http://results.skitosea.com/api/v1/' + yearsArray[i] + '/results';
-//     request(url).pipe(res);
-//   };
-// });
-
-// app.get('/results', function (req, res) {
-
-//   var options = {
-//     url: 'http://results.skitosea.com/api/v1/2009/results',
-//     method: 'GET',
-//     accept: 'application/json'
-//   };
-
-//   // var path = './public/json/db.json';
-//   // var ws = fs.createWriteStream(path,'utf8');
-//   // var json = JSON.stringify(ws);
-//   // console.log(json);
-
-
-//   // Start the request
-//   request(options).on('error', function (error) {
-//     console.log(error);
-//   }).pipe(res);
-// });
-
-// app.get('/output', function (req, res) {
-//   var options = {
-//     url: 'http://results.skitosea.com/api/v1/2009/results',
-//     method: 'GET',
-//     accept: 'application/json'
-//   };
-//   // Start the request
-//   request(options).on('error', function (error) {
-//     console.log(error);
-//   }).pipe(res);
-// });
 
 // -------------------------------------------------- //
 // Create and start our server

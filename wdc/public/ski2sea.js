@@ -8,91 +8,49 @@
     myConnector.getSchema = function (schemaCallback) {
 
         // Schema for results data
-        var results_cols = [{
-            id: "leg", alias: "Leg", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "pa", alias: "Place After", dataType: tableau.dataTypeEnum.int
-        }, {
-            id: "dq", alias: "DQ or DNF", dataType: tableau.dataTypeEnum.bool
-        }, {
-            id: "tn", alias: "Team Number", dataType: tableau.dataTypeEnum.int
-        }, {
-            id: "dr", alias: "Division Place", dataType: tableau.dataTypeEnum.int
-        }, {
-            id: "du", alias: "Elapsed Time", dataType: tableau.dataTypeEnum.date
-        }, {
-            id: "rn", alias: "Leg Place", dataType: tableau.dataTypeEnum.int
-        }, {
-            id: "st", alias: "Start Time", dataType: tableau.dataTypeEnum.date
-        }, {
-            id: "ed", alias: "End Time", dataType: tableau.dataTypeEnum.date
-        }];
+        var results_cols = [
+            { id: "leg", alias: "Leg", dataType: tableau.dataTypeEnum.string },
+            { id: "pa", alias: "Place After", dataType: tableau.dataTypeEnum.int },
+            { id: "dq", alias: "DQ or DNF", dataType: tableau.dataTypeEnum.bool },
+            { id: "tn", alias: "Team Number", dataType: tableau.dataTypeEnum.int },
+            { id: "dr", alias: "Division Place", dataType: tableau.dataTypeEnum.int },
+            { id: "du", alias: "Elapsed Time", dataType: tableau.dataTypeEnum.date },
+            { id: "rn", alias: "Leg Place", dataType: tableau.dataTypeEnum.int },
+            { id: "st", alias: "Start Time", dataType: tableau.dataTypeEnum.date },
+            { id: "ed", alias: "End Time", dataType: tableau.dataTypeEnum.date }
+        ];
         var resultsTable = {
             id: "results", alias: "Results Data", columns: results_cols
         };
 
         // Schema for teams data
-        var teams_cols = [{
-            id: "teamId", alias: "Team ID", dataType: tableau.dataTypeEnum.int
-        }, {
-            id: "ca1_n", alias: "Canoe 1 Name", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "ca1_g", alias: "Canoe 1 Gender", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "ca2_n", alias: "Canoe 2 Name", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "ca2_g", alias: "Canoe 2 Gender", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "rb_n", alias: "RD Bike Name", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "rb_g", alias: "RD Bike Gender", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "ru_n", alias: "Run Name", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "ru_g", alias: "Run Gender", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "xc_n", alias: "XC Ski Name", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "xc_g", alias: "XC Ski Gender", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "dh_n", alias: "DH Ski Name", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "dh_g", alias: "DH Ski Gender", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "ka_n", alias: "Kayak Name", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "ka_g", alias: "Kayak Gender", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "mb_n", alias: "XC Bike Name", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "mb_g", alias: "XC Bike Gender", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "tn", alias: "Team Name", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "dc", alias: "Division", dataType: tableau.dataTypeEnum.string
-        }];
+        var teams_cols = [
+            { id: "teamId", alias: "Team ID", dataType: tableau.dataTypeEnum.int },
+            { id: "leg", alias: "Race Leg", dataType: tableau.dataTypeEnum.string },
+            { id: "n", alias: "Name", dataType: tableau.dataTypeEnum.string },
+            { id: "g", alias: "Gender", dataType: tableau.dataTypeEnum.string },
+            { id: "tn", alias: "Team Name", dataType: tableau.dataTypeEnum.string },
+            { id: "dc", alias: "Division", dataType: tableau.dataTypeEnum.string }
+        ];
         var teamsTable = {
             id: "teams", alias: "Teams Data", columns: teams_cols
         };
 
         // Schema for divisions data
-        var divisions_cols = [{
-            id: "code", alias: "Code", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "long_name", alias: "Long Name", dataType: tableau.dataTypeEnum.string
-        }];
+        var divisions_cols = [
+            { id: "code", alias: "Code", dataType: tableau.dataTypeEnum.string },
+            { id: "long_name", alias: "Long Name", dataType: tableau.dataTypeEnum.string }
+        ];
         var divisionsTable = {
             id: "divisions", alias: "Divisions Data", columns: divisions_cols
         };
 
         // Schema for legs data
-        var legs_cols = [{
-            id: "code", alias: "Code", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "short_name", alias: "Short Name", dataType: tableau.dataTypeEnum.string
-        }, {
-            id: "long_name", alias: "Long Name", dataType: tableau.dataTypeEnum.string
-        }];
+        var legs_cols = [
+            { id: "code", alias: "Code", dataType: tableau.dataTypeEnum.string },
+            { id: "short_name", alias: "Short Name", dataType: tableau.dataTypeEnum.string },
+            { id: "long_name", alias: "Long Name", dataType: tableau.dataTypeEnum.string }
+        ];
         var legsTable = {
             id: "legs", alias: "Legs Data", columns: legs_cols
         };
@@ -136,44 +94,18 @@
                 }
                 if (table.tableInfo.id == "teams") {
                     console.log(teams);
-                    var i, j;
+                    var i, j, k;
                     for (i in teams) {
-                        for (j in teams[i].rs.ca) {
-                            // if (teams[i].rs.ca[1] == "undefined") {
-                            //     continue;
-                            // }
-                            for (j in teams[i].rs.rb) {
-                                for (j in teams[i].rs.ru) {
-                                    for (j in teams[i].rs.xc) {
-                                        for (j in teams[i].rs.dh) {
-                                            for (j in teams[i].rs.ka) {
-                                                for (j in teams[i].rs.mb) {
-                                                    tableData.push({
-                                                        "teamId": i,
-                                                        "tn": teams[i].tn,
-                                                        "dc": teams[i].dc,
-                                                        "ca1_n": teams[i].rs.ca[0].n,
-                                                        "ca1_g": teams[i].rs.ca[0].g,
-                                                        "ca2_n": teams[i].rs.ca[1].n,
-                                                        "ca2_g": teams[i].rs.ca[1].g,
-                                                        "rb_n": teams[i].rs.rb[j].n,
-                                                        "rb_g": teams[i].rs.rb[j].g,
-                                                        "ru_n": teams[i].rs.ru[j].n,
-                                                        "ru_g": teams[i].rs.ru[j].g,
-                                                        "xc_n": teams[i].rs.xc[j].n,
-                                                        "xc_g": teams[i].rs.xc[j].g,
-                                                        "dh_n": teams[i].rs.dh[j].n,
-                                                        "dh_g": teams[i].rs.dh[j].g,
-                                                        "ka_n": teams[i].rs.ka[j].n,
-                                                        "ka_g": teams[i].rs.ka[j].g,
-                                                        "mb_n": teams[i].rs.mb[j].n,
-                                                        "mb_g": teams[i].rs.mb[j].g
-                                                    });
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                        for (j in teams[i].rs) {
+                            for (k in teams[i].rs[j]) {
+                                tableData.push({
+                                    "teamId": i,
+                                    "tn": teams[i].tn,
+                                    "dc": teams[i].dc,
+                                    "leg": j,
+                                    "n": teams[i].rs[j][k].n,
+                                    "g": teams[i].rs[j][k].g
+                                });
                             }
                         }
                     }
@@ -198,6 +130,8 @@
                         });
                     }
                 }
+
+
                 table.appendRows(tableData);
                 console.log(tableData);
                 doneCallback();

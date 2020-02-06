@@ -1,13 +1,5 @@
 (function () {
     'use strict';
-    $(document).ready(function () {
-
-        $("#getracedata").click(function () {
-            tableau.connectionName = "Ski to Sea Race Results Data";
-            tableau.submit();
-        });
-    });
-
     //------------- Tableau WDC code -------------//
     // Create tableau connector, should be called first
     var myConnector = tableau.makeConnector();
@@ -31,17 +23,17 @@
         var results_cols = [{
             id: "leg", alias: "Leg", dataType: tableau.dataTypeEnum.string
         }, {
-            id: "pa", alias: "Place After", dataType: tableau.dataTypeEnum.float
+            id: "pa", alias: "Place After", dataType: tableau.dataTypeEnum.int
         }, {
             id: "dq", alias: "DQ or DNF", dataType: tableau.dataTypeEnum.bool
         }, {
-            id: "tn", alias: "Team Number", dataType: tableau.dataTypeEnum.float
+            id: "tn", alias: "Team Number", dataType: tableau.dataTypeEnum.int
         }, {
-            id: "dr", alias: "Division Place", dataType: tableau.dataTypeEnum.float
+            id: "dr", alias: "Division Place", dataType: tableau.dataTypeEnum.int
         }, {
             id: "du", alias: "Elapsed Time", dataType: tableau.dataTypeEnum.date
         }, {
-            id: "rn", alias: "Leg Place", dataType: tableau.dataTypeEnum.float
+            id: "rn", alias: "Leg Place", dataType: tableau.dataTypeEnum.int
         }, {
             id: "st", alias: "Start Time", dataType: tableau.dataTypeEnum.date
         }, {
@@ -54,7 +46,7 @@
 
         // Schema for teams data
         var teams_cols = [{
-            id: "teamId", alias: "Team ID", dataType: tableau.dataTypeEnum.float
+            id: "teamId", alias: "Team ID", dataType: tableau.dataTypeEnum.int
         }, {
             id: "ca1_n", alias: "Canoe 1 Name", dataType: tableau.dataTypeEnum.string
         }, {
@@ -129,69 +121,176 @@
     };
 
 
-    // Download the data
+    // // Download the data
+    // myConnector.getData = function (table, doneCallback) {
+    //     // var yearsArray = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
+    //     var apiCall = "http://localhost:3333/output";
+
+    //     $.getJSON(apiCall, function (resp) {
+    //         var results = resp.results,
+    //             teams = resp.teams,
+    //             divisions = resp.divisions,
+    //             legs = resp.legs,
+    //             tableData = [];
+
+    //         if (table.tableInfo.id == "results") {
+    //             console.log(results);
+    //             var i, j
+    //             for (i in results) {
+    //                 for (j in results[i]) {
+    //                     tableData.push({
+    //                         "leg": i,
+    //                         "pa": results[i][j].pa,
+    //                         "dq": results[i][j].dq,
+    //                         "tn": results[i][j].tn,
+    //                         "dr": results[i][j].dr,
+    //                         "du": results[i][j].du,
+    //                         "rn": results[i][j].rn,
+    //                         "st": results[i][j].st,
+    //                         "ed": results[i][j].ed
+    //                     });
+    //                 }
+    //             }
+    //         }
+    //         if (table.tableInfo.id == "teams") {
+    //             console.log(teams);
+    //             var i, j;
+    //             for (i in teams) {
+    //                 for (j in teams[i].rs.ca) {
+    //                     for (j in teams[i].rs.rb) {
+    //                         for (j in teams[i].rs.ru) {
+    //                             for (j in teams[i].rs.xc) {
+    //                                 for (j in teams[i].rs.dh) {
+    //                                     for (j in teams[i].rs.ka) {
+    //                                         for (j in teams[i].rs.mb) {
+    //                                             tableData.push({
+    //                                                 "teamId": i,
+    //                                                 "tn": teams[i].tn,
+    //                                                 "dc": teams[i].dc,
+    //                                                 "ca1_n": teams[i].rs.ca[0].n,
+    //                                                 "ca1_g": teams[i].rs.ca[0].g,
+    //                                                 "ca2_n": teams[i].rs.ca[1].n,
+    //                                                 "ca2_g": teams[i].rs.ca[1].g,
+    //                                                 "rb_n": teams[i].rs.rb[j].n,
+    //                                                 "rb_g": teams[i].rs.rb[j].g,
+    //                                                 "ru_n": teams[i].rs.ru[j].n,
+    //                                                 "ru_g": teams[i].rs.ru[j].g,
+    //                                                 "xc_n": teams[i].rs.xc[j].n,
+    //                                                 "xc_g": teams[i].rs.xc[j].g,
+    //                                                 "dh_n": teams[i].rs.dh[j].n,
+    //                                                 "dh_g": teams[i].rs.dh[j].g,
+    //                                                 "ka_n": teams[i].rs.ka[j].n,
+    //                                                 "ka_g": teams[i].rs.ka[j].g,
+    //                                                 "mb_n": teams[i].rs.mb[j].n,
+    //                                                 "mb_g": teams[i].rs.mb[j].g
+    //                                             });
+    //                                         }
+    //                                     }
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //         if (table.tableInfo.id == "divisions") {
+    //             console.log(divisions);
+    //             var i;
+    //             for (i in divisions) {
+    //                 tableData.push({
+    //                     "code": i,
+    //                     "long_name": divisions[i]
+    //                 });
+    //             }
+    //         }
+    //         if (table.tableInfo.id == "legs") {
+    //             console.log(legs);
+    //             for (var i = 0, len = legs.length; i < len; i++) {
+    //                 tableData.push({
+    //                     "code": legs[i].code,
+    //                     "short_name": legs[i].short_name,
+    //                     "long_name": legs[i].long_name
+    //                 });
+    //             }
+    //         }
+
+    //         table.appendRows(tableData);
+    //         console.log(tableData);
+
+    //         doneCallback();
+    //     });
+    // };
+
     myConnector.getData = function (table, doneCallback) {
-        // var yearsArray = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
-        var apiCall = "http://localhost:3333/output";
+        var url_beg = "http://localhost:3333/";
+        var tableData = [];
 
-        $.getJSON(apiCall, function (resp) {
-            var results = resp.results,
-                teams = resp.teams,
-                divisions = resp.divisions,
-                legs = resp.legs,
-                tableData = [];
+        var patches = JSON.parse(tableau.connectionData).patches;
 
-            if (table.tableInfo.id == "results") {
-                console.log(results);
-                var i, j
-                for (i in results) {
-                    for (j in results[i]) {
-                        tableData.push({
-                            "leg": i,
-                            "pa": results[i][j].pa,
-                            "dq": results[i][j].dq,
-                            "tn": results[i][j].tn,
-                            "dr": results[i][j].dr,
-                            "du": results[i][j].du,
-                            "rn": results[i][j].rn,
-                            "st": results[i][j].st,
-                            "ed": results[i][j].ed
-                        });
+        patches = patches.map(function (item) {
+            var url = url_beg + item;
+            $.getJSON(url, function (resp) {
+                var results = resp.results,
+                    teams = resp.teams,
+                    divisions = resp.divisions,
+                    legs = resp.legs,
+                    tableData = [];
+
+                if (table.tableInfo.id == "results") {
+                    console.log(results);
+                    var i, j
+                    for (i in results) {
+                        for (j in results[i]) {
+                            tableData.push({
+                                "leg": i,
+                                "pa": results[i][j].pa,
+                                "dq": results[i][j].dq,
+                                "tn": results[i][j].tn,
+                                "dr": results[i][j].dr,
+                                "du": results[i][j].du,
+                                "rn": results[i][j].rn,
+                                "st": results[i][j].st,
+                                "ed": results[i][j].ed
+                            });
+                        }
                     }
                 }
-            }
-            if (table.tableInfo.id == "teams") {
-                console.log(teams);
-                var i, j;
-                for (i in teams) {
-                    for (j in teams[i].rs.ca) {
-                        for (j in teams[i].rs.rb) {
-                            for (j in teams[i].rs.ru) {
-                                for (j in teams[i].rs.xc) {
-                                    for (j in teams[i].rs.dh) {
-                                        for (j in teams[i].rs.ka) {
-                                            for (j in teams[i].rs.mb) {
-                                                tableData.push({
-                                                    "teamId": i,
-                                                    "tn": teams[i].tn,
-                                                    "dc": teams[i].dc,
-                                                    "ca1_n": teams[i].rs.ca[0].n,
-                                                    "ca1_g": teams[i].rs.ca[0].g,
-                                                    "ca2_n": teams[i].rs.ca[1].n,
-                                                    "ca2_g": teams[i].rs.ca[1].g,
-                                                    "rb_n": teams[i].rs.rb[j].n,
-                                                    "rb_g": teams[i].rs.rb[j].g,
-                                                    "ru_n": teams[i].rs.ru[j].n,
-                                                    "ru_g": teams[i].rs.ru[j].g,
-                                                    "xc_n": teams[i].rs.xc[j].n,
-                                                    "xc_g": teams[i].rs.xc[j].g,
-                                                    "dh_n": teams[i].rs.dh[j].n,
-                                                    "dh_g": teams[i].rs.dh[j].g,
-                                                    "ka_n": teams[i].rs.ka[j].n,
-                                                    "ka_g": teams[i].rs.ka[j].g,
-                                                    "mb_n": teams[i].rs.mb[j].n,
-                                                    "mb_g": teams[i].rs.mb[j].g
-                                                });
+                if (table.tableInfo.id == "teams") {
+                    console.log(teams);
+                    var i, j;
+                    for (i in teams) {
+                        for (j in teams[i].rs.ca) {
+                            if (!teams[i].rs.ca.hasOwnProperty(j)) {
+                                continue;
+                            }
+                            for (j in teams[i].rs.rb) {
+                                for (j in teams[i].rs.ru) {
+                                    for (j in teams[i].rs.xc) {
+                                        for (j in teams[i].rs.dh) {
+                                            for (j in teams[i].rs.ka) {
+                                                for (j in teams[i].rs.mb) {
+                                                    tableData.push({
+                                                        "teamId": i,
+                                                        "tn": teams[i].tn,
+                                                        "dc": teams[i].dc,
+                                                        "ca1_n": teams[i].rs.ca[0].n,
+                                                        "ca1_g": teams[i].rs.ca[0].g,
+                                                        "ca2_n": teams[i].rs.ca[1].n,
+                                                        "ca2_g": teams[i].rs.ca[1].g,
+                                                        "rb_n": teams[i].rs.rb[j].n,
+                                                        "rb_g": teams[i].rs.rb[j].g,
+                                                        "ru_n": teams[i].rs.ru[j].n,
+                                                        "ru_g": teams[i].rs.ru[j].g,
+                                                        "xc_n": teams[i].rs.xc[j].n,
+                                                        "xc_g": teams[i].rs.xc[j].g,
+                                                        "dh_n": teams[i].rs.dh[j].n,
+                                                        "dh_g": teams[i].rs.dh[j].g,
+                                                        "ka_n": teams[i].rs.ka[j].n,
+                                                        "ka_g": teams[i].rs.ka[j].g,
+                                                        "mb_n": teams[i].rs.mb[j].n,
+                                                        "mb_g": teams[i].rs.mb[j].g
+                                                    });
+                                                }
                                             }
                                         }
                                     }
@@ -200,32 +299,30 @@
                         }
                     }
                 }
-            }
-            if (table.tableInfo.id == "divisions") {
-                console.log(divisions);
-                var i;
-                for (i in divisions) {
-                    tableData.push({
-                        "code": i,
-                        "long_name": divisions[i]
-                    });
+                if (table.tableInfo.id == "divisions") {
+                    console.log(divisions);
+                    var i;
+                    for (i in divisions) {
+                        tableData.push({
+                            "code": i,
+                            "long_name": divisions[i]
+                        });
+                    }
                 }
-            }
-            if (table.tableInfo.id == "legs") {
-                console.log(legs);
-                for (var i = 0, len = legs.length; i < len; i++) {
-                    tableData.push({
-                        "code": legs[i].code,
-                        "short_name": legs[i].short_name,
-                        "long_name": legs[i].long_name
-                    });
+                if (table.tableInfo.id == "legs") {
+                    console.log(legs);
+                    for (var i = 0, len = legs.length; i < len; i++) {
+                        tableData.push({
+                            "code": legs[i].code,
+                            "short_name": legs[i].short_name,
+                            "long_name": legs[i].long_name
+                        });
+                    }
                 }
-            }
-
-            table.appendRows(tableData);
-            console.log(tableData);
-
-            doneCallback();
+                table.appendRows(tableData);
+                console.log(tableData);
+                doneCallback();
+            });
         });
     };
 
@@ -252,6 +349,27 @@
 //     obj.send(null);
 // }
 
-function send() {
-    tableau.submit();
-}
+// can probably remove since submit is contained in the click function
+// function send() {
+//     tableau.submit();
+// }
+
+$(document).ready(function () {
+
+    $("#getracedata").click(function () {
+        // Get selected patch versions from web form.
+        var patches = [];
+        $('#patches :selected').each(function () {
+            patches.push($(this).text())
+        });
+
+        // Store patches in connection data object to build url in myConnector.getData.
+        var conn_data = {
+            patches: patches,
+        };
+
+        tableau.connectionData = JSON.stringify(conn_data);
+        tableau.connectionName = "Ski to Sea Race Results Data";
+        tableau.submit();
+    });
+});

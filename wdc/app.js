@@ -37,17 +37,69 @@ app.get('/', function (req, res) {
   res.redirect('/index.html');
 });
 
-app.get('/output', function (req, res) {
+app.get('/2009', function (req, res) {
   var url = 'http://results.skitosea.com/api/v1/2009/results';
   var output = request(url).pipe(res);
 });
 
-// app.get('/output', function (req, res) {
+app.get('/2010', function (req, res) {
+  var url = 'http://results.skitosea.com/api/v1/2010/results';
+  var output = request(url).pipe(res);
+});
+
+app.get('/2011', function (req, res) {
+  var url = 'http://results.skitosea.com/api/v1/2011/results';
+  var output = request(url).pipe(res);
+});
+
+app.get('/2012', function (req, res) {
+  var url = 'http://results.skitosea.com/api/v1/2012/results';
+  var output = request(url).pipe(res);
+});
+
+app.get('/2013', function (req, res) {
+  var url = 'http://results.skitosea.com/api/v1/2013/results';
+  var output = request(url).pipe(res);
+});
+
+app.get('/2014', function (req, res) {
+  var url = 'http://results.skitosea.com/api/v1/2014/results';
+  var output = request(url).pipe(res);
+});
+
+app.get('/2015', function (req, res) {
+  var url = 'http://results.skitosea.com/api/v1/2015/results';
+  var output = request(url).pipe(res);
+});
+
+app.get('/2016', function (req, res) {
+  var url = 'http://results.skitosea.com/api/v1/2016/results';
+  var output = request(url).pipe(res);
+});
+
+app.get('/2017', function (req, res) {
+  var url = 'http://results.skitosea.com/api/v1/2017/results';
+  var output = request(url).pipe(res);
+});
+
+app.get('/2018', function (req, res) {
+  var url = 'http://results.skitosea.com/api/v1/2018/results';
+  var output = request(url).pipe(res);
+});
+
+app.get('/2019', function (req, res) {
+  var url = 'http://results.skitosea.com/api/v1/2019/results';
+  var output = request(url).pipe(res);
+});
+
+// app.get('/:20??', function (req, res) {
 //   // var yearsArray = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
 //   var yearsArray = [2009, 2010, 2011];
 //   for (let i = 0; i < yearsArray.length; i++) {
 //     var url = 'http://results.skitosea.com/api/v1/' + yearsArray[i] + '/results';
 //     request(url).pipe(res);
+//     console.log(res);
+    
 //   };
 // });
 

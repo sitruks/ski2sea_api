@@ -33,6 +33,11 @@
             text-align: center;
         }
 
+        option {
+            background-color: #40646a;
+            text-align: center;
+        }
+
         h1 {
             margin-top: 30px;
             font-weight: normal;
@@ -77,13 +82,29 @@
     <p class="instructions">Just boot up Tableau and insert the URL above.</p>
     <br>
     <!-- This button will pull the user's liked venues once the user is authenticated -->
-    <p class="instructions">Once loaded, THEN press the big button ... ;)</p>
+    <p class="instructions">Once loaded, Choose the Year, THEN press the big button ... ;)</p>
     <br><br>
-    <p><a href="#" id="getracedata" class="button">
-            <span class="glyphicon glyphicon-arrow-right"></span>
-            Get Race Data!
-            <span class="glyphicon glyphicon-arrow-left"> </span>
-        </a></p>
+    <p>
+        <form>
+            <div class="form-group">
+                <label for="patch">Select Patch Version</label>
+                <select multiple class="form-control" id="patches">
+                    <option>2009</option>
+                    <option>2010</option>
+                    <option>2011</option>
+                    <option>2012</option>
+                    <option>2013</option>
+                    <option>2014</option>
+                    <option>2015</option>
+                    <option>2016</option>
+                    <option>2017</option>
+                    <option>2018</option>
+                    <option>2019</option>
+                </select>
+            </div>
+            <button type="submit" id="getracedata" class="btn btn-primary">Get Race Results!</button>
+        </form>
+    </p>
     <br><br>
 </body>
 

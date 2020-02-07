@@ -13,7 +13,7 @@ var app = express();
 // Express set-up and middleware
 // -------------------------------------------------- //
 app.set('port', (process.env.PORT || config.PORT));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/wdc/public'));
 app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', process.env.ORIGIN || '*');
   next();

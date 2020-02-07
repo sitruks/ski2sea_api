@@ -11,7 +11,7 @@
 
 - This WDC connects to the Ski to Sea API, referenced below.
 - After trying out just about every Tableau example (./webdataconnector/Examples), I ended up modeling the app after the OAuthProxyExample Express App example for this first attempt.
-- @github **soitknows**'s repo was also a good inspiration
+- @github **soitknows**'s repo was also a good source of inspiration
 
 ## References  
 - https://skitosea.com/results  

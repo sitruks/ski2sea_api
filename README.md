@@ -1,5 +1,8 @@
 # Tableau Web Data Connector with a JSON API using Ski to Sea Race Data  
 
+## Instructions (Deployed WDC - Github Pages)
+- https://sitruks.github.io/ski2sea_api/wdc/public/index.html? 
+
 ## Instructions (Dev Server)
 
 - navigate from the `root` to `ski2sea_api/wdc`

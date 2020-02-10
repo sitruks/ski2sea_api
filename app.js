@@ -12,16 +12,20 @@ var app = express();
 // -------------------------------------------------- //
 // Express set-up and middleware
 // -------------------------------------------------- //
-app.set('port', (process.env.PORT || config.PORT || 3333));
+app.set('port', (process.env.PORT || config.PORT));
 app.use(express.static(__dirname + '/public'));
-app.use(express.static(path.join(__dirname + '/public')));
+// app.use(express.static(path.join(__dirname + '/public')));
 
 // -------------------------------------------------- //
 // Routes
 // -------------------------------------------------- //
-app.get('/', function (req, res) {
-  console.log("got here");
-  res.redirect('/index.html');
+// app.get('/', function (req, res) {
+//   console.log("got here");
+//   res.redirect('/index.html');
+// });
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 app.get('/2009', function (req, res) {

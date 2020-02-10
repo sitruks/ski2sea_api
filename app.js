@@ -1,7 +1,7 @@
 // -------------------------------------------------- //
 // Module Dependencies
 // -------------------------------------------------- //
-require("dotenv").config();
+var config = require('./config.js');
 var express = require('express');
 var http = require('http');
 var path = require("path");
@@ -12,7 +12,7 @@ var app = express();
 // -------------------------------------------------- //
 // Express set-up and middleware
 // -------------------------------------------------- //
-app.set('port', (process.env.PORT || 3333));
+app.set('port', (process.env.PORT || config.PORT || 3333));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname + '/public')));
 

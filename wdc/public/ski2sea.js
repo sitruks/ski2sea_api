@@ -110,6 +110,51 @@
                         }
                     }
                 }
+                // a way to visualize the race teams in one line, though there is a duplication issue, and also an output issue with this method when there is no racer, so it is not a preferred method
+                // if (table.tableInfo.id == "teams") {
+                //     console.log(teams);
+                //     var i, j;
+                //     for (i in teams) {
+                //         for (j in teams[i].rs.ca) {
+                //             if (!teams[i].rs.ca.hasOwnProperty(j)) {
+                //                 continue;
+                //             }
+                //             for (j in teams[i].rs.rb) {
+                //                 for (j in teams[i].rs.ru) {
+                //                     for (j in teams[i].rs.xc) {
+                //                         for (j in teams[i].rs.dh) {
+                //                             for (j in teams[i].rs.ka) {
+                //                                 for (j in teams[i].rs.mb) {
+                //                                     tableData.push({
+                //                                         "teamId": i,
+                //                                         "tn": teams[i].tn,
+                //                                         "dc": teams[i].dc,
+                //                                         "ca1_n": teams[i].rs.ca[0].n,
+                //                                         "ca1_g": teams[i].rs.ca[0].g,
+                //                                         "ca2_n": teams[i].rs.ca[1].n,
+                //                                         "ca2_g": teams[i].rs.ca[1].g,
+                //                                         "rb_n": teams[i].rs.rb[j].n,
+                //                                         "rb_g": teams[i].rs.rb[j].g,
+                //                                         "ru_n": teams[i].rs.ru[j].n,
+                //                                         "ru_g": teams[i].rs.ru[j].g,
+                //                                         "xc_n": teams[i].rs.xc[j].n,
+                //                                         "xc_g": teams[i].rs.xc[j].g,
+                //                                         "dh_n": teams[i].rs.dh[j].n,
+                //                                         "dh_g": teams[i].rs.dh[j].g,
+                //                                         "ka_n": teams[i].rs.ka[j].n,
+                //                                         "ka_g": teams[i].rs.ka[j].g,
+                //                                         "mb_n": teams[i].rs.mb[j].n,
+                //                                         "mb_g": teams[i].rs.mb[j].g
+                //                                     });
+                //                                 }
+                //                             }
+                //                         }
+                //                     }
+                //                 }
+                //             }
+                //         }
+                //     }
+                // }
                 if (table.tableInfo.id == "divisions") {
                     console.log(divisions);
                     var i;

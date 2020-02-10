@@ -4,7 +4,7 @@
   "description": "This is a Tableau Web Data Connector for annual Ski to Sea Race Results API",
   "scripts": {
     "start": "node app.js",
-    "start dev": "nodemon app.js"
+    "dev": "nodemon app.js"
   },
   "author": "Kurtis Santillanes",
   "contributors": [],

@@ -2,7 +2,6 @@
 // Module Dependencies
 // -------------------------------------------------- //
 require("dotenv").config();
-// var config = require('./config.js');
 var express = require('express');
 var http = require('http');
 var request = require('request');
@@ -14,11 +13,6 @@ var app = express();
 // -------------------------------------------------- //
 app.set('port', (process.env.PORT || 3333));
 app.use(express.static(__dirname + '/public'));
-// CORS could be enabled using this midware with a little tweaking, but decided to call the exact route instead for this example
-// app.use(function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', process.env.ORIGIN || '*');
-//   next();
-// });
 
 // -------------------------------------------------- //
 // Routes

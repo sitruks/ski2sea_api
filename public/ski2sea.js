@@ -56,21 +56,19 @@
         };
 
         schemaCallback([resultsTable, teamsTable, divisionsTable, legsTable]);
-    }
+    };
 
     myConnector.getData = function (table, doneCallback) {
-        var url_beg = "http://results.skitosea.com/api/v1/";
-        var url_end = "/results";
-        // var url_dev = "http://localhost:3333/";
+        // var url_beg = "http://results.skitosea.com/api/v1/";
+        // var url_end = "/results";
+        var url_dev = "http://localhost:3333/";
         var tableData = [];
-
         var patches = JSON.parse(tableau.connectionData).patches;
 
         patches = patches.map(function (item) {
-            // var url = url_dev + item;
-            var url = url_beg + item + url_end;
+            var url = url_dev + item;
+            // var url = url_beg + item + url_end;
             console.log(url);
-            // xhr.open('GET', url);
             $.getJSON(url, function (resp) {
                 var results = resp.results,
                     teams = resp.teams,

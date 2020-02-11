@@ -70,22 +70,22 @@
             // var url = url_dev + item;
             var url = url_beg + item + url_end;
             console.log(url);
-            if (XMLHttpRequest) {
-                var request = new XMLHttpRequest();
-                var handler;
-                if ("withCredentials" in request) {
-                    // Firefox 3.5 and Safari 4
-                    request.open('GET', url, true);
-                    request.onreadystatechange = handler;
-                    request.send();
-                }
-                else if (XDomainRequest) {
-                    // IE8
-                    var xdr = new XDomainRequest();
-                    xdr.open("get", url);
-                    xdr.send();
-                }
-            }
+            // if (XMLHttpRequest) {
+            //     var request = new XMLHttpRequest();
+            //     var handler;
+            //     if ("withCredentials" in request) {
+            //         // Firefox 3.5 and Safari 4
+            //         request.open('GET', url, true);
+            //         request.onreadystatechange = handler;
+            //         request.send();
+            //     }
+            //     else if (XDomainRequest) {
+            //         // IE8
+            //         var xdr = new XDomainRequest();
+            //         xdr.open("get", url);
+            //         xdr.send();
+            //     }
+            // }
 
             $.getJSON((url), function (resp) {
                 var results = resp.results,

@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "description": "This is a Tableau Web Data Connector for annual Ski to Sea Race Results API",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node app.js"
   },
   "author": "Kurtis Santillanes",
   "contributors": [],
@@ -14,13 +13,11 @@
     "url": "git+https://github.com/sitruks/ski2sea_api"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "request": "^2.88.0"
   },
   "engines": {
     "node": ">= 0.10.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.2"
   }
 }

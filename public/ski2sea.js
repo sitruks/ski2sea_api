@@ -59,34 +59,18 @@
     }
 
     myConnector.getData = function (table, doneCallback) {
-        var url_beg = "http://results.skitosea.com/api/v1/";
-        var url_end = "/results";
-        // var url_dev = "http://localhost:3333/";
+        // var url_beg = "http://results.skitosea.com/api/v1/";
+        // var url_end = "/results";
+        var url_dev = "http://localhost:3333/";
         var tableData = [];
 
         var patches = JSON.parse(tableau.connectionData).patches;
 
         patches = patches.map(function (item) {
-            // var url = url_dev + item;
-            var url = url_beg + item + url_end;
+            var url = url_dev + item;
+            // var url = url_beg + item + url_end;
             console.log(url);
-            // if (XMLHttpRequest) {
-            //     var request = new XMLHttpRequest();
-            //     var handler;
-            //     if ("withCredentials" in request) {
-            //         // Firefox 3.5 and Safari 4
-            //         request.open('GET', url, true);
-            //         request.onreadystatechange = handler;
-            //         request.send();
-            //     }
-            //     else if (XDomainRequest) {
-            //         // IE8
-            //         var xdr = new XDomainRequest();
-            //         xdr.open("get", url);
-            //         xdr.send();
-            //     }
-            // }
-
+            // xhr.open('GET', url);
             $.getJSON((url), function (resp) {
                 var results = resp.results,
                     teams = resp.teams,

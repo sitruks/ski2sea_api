@@ -35,6 +35,15 @@ app.set('port', (process.env.PORT || 3333));
 // });
 
 app.use(express.static(__dirname + '/public'));
+
+
+// -------------------------------------------------- //
+// Create and start our server
+// -------------------------------------------------- //
+http.createServer(app).listen(app.get('port'), function () {
+  console.log('Express server listening on port ' + app.get('port'));
+});
+
 // -------------------------------------------------- //
 // Routes
 // -------------------------------------------------- //
@@ -42,10 +51,6 @@ app.use(express.static(__dirname + '/public'));
 //   console.log("got here");
 //   res.redirect('/index.html');
 // });
-
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname + '/public/index.html'));
-});
 
 app.get('/2009', function (req, res) {
   var url = 'http://results.skitosea.com/api/v1/2009/results';
@@ -102,9 +107,6 @@ app.get('/2019', function (req, res) {
   var output = request(url).pipe(res);
 });
 
-// -------------------------------------------------- //
-// Create and start our server
-// -------------------------------------------------- //
-http.createServer(app).listen(app.get('port'), function () {
-  console.log('Express server listening on port ' + app.get('port'));
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
 });

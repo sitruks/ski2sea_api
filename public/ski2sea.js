@@ -1,4 +1,5 @@
 (function () {
+    'use strict';
     //------------- Tableau WDC code -------------//
     // Create tableau connector, should be called first
     var myConnector = tableau.makeConnector();

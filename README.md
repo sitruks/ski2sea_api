@@ -2,6 +2,7 @@
 
 ## Instructions (Deployed WDC - Github Pages)
 - https://sitruks.github.io/ski2sea_api/wdc/public/index.html? 
+- this is a work in progress
 
 ## Instructions (Dev Server)
 

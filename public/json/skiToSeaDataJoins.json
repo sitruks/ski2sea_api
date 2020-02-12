@@ -3,19 +3,30 @@
     {
       "alias" : "Results By Leg",
       "tables" : [
+        { "id"    : "teams",
+          "alias" : "Teams" },
         { "id"    : "results",
           "alias" : "Results" },
         { "id"    : "divisions",
           "alias" : "Divisions" },
         { "id"    : "legs",
-          "alias" : "Legs" },
-        { "id"    : "teams",
-          "alias" : "Teams" }
+          "alias" : "Legs" }
       ],
       "joins" : [
         {
           "left" : {
+            "tableAlias" : "Teams",
+            "columnId"   : "teamId"
+          },
+          "right" : {
             "tableAlias" : "Results",
+            "columnId"   : "tn"
+          },
+          "joinType" : "inner"
+        },
+        {
+          "left" : {
+            "tableAlias" : "Teams",
             "columnId"   : "leg"
           },
           "right" : {
@@ -26,23 +37,12 @@
         },
         {
           "left" : {
-            "tableAlias" : "Results",
-            "columnId"   : "tn"
-          },
-          "right" : {
-            "tableAlias" : "Teams",
-            "columnId"   : "teamId"
-          },
-          "joinType" : "inner"
-        },
-        {
-          "left" : {
             "tableAlias" : "Teams",
             "columnId"   : "dc"
           },
           "right" : {
             "tableAlias" : "Divisions",
-            "columnId"   : "divisions"
+            "columnId"   : "code"
           },
           "joinType" : "inner"
         }

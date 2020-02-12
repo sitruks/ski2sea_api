@@ -6,23 +6,22 @@
 
     // Define the schema
     myConnector.getSchema = function (schemaCallback) {
-
         // Schema for results data
         var results_cols = [
+            { id: "year", alias: "Year", dataType: tableau.dataTypeEnum.int },
             { id: "leg", alias: "Leg", dataType: tableau.dataTypeEnum.string },
             { id: "pa", alias: "Place After", dataType: tableau.dataTypeEnum.int },
             { id: "dq", alias: "DQ or DNF", dataType: tableau.dataTypeEnum.bool },
             { id: "tn", alias: "Team Number", dataType: tableau.dataTypeEnum.int },
             { id: "dr", alias: "Division Place", dataType: tableau.dataTypeEnum.int },
-            { id: "du", alias: "Elapsed Time", dataType: tableau.dataTypeEnum.date },
+            { id: "du", alias: "Elapsed Time", dataType: tableau.dataTypeEnum.datetime },
             { id: "rn", alias: "Leg Place", dataType: tableau.dataTypeEnum.int },
-            { id: "st", alias: "Start Time", dataType: tableau.dataTypeEnum.date },
-            { id: "ed", alias: "End Time", dataType: tableau.dataTypeEnum.date }
+            { id: "st", alias: "Start Time", dataType: tableau.dataTypeEnum.datetime },
+            { id: "ed", alias: "End Time", dataType: tableau.dataTypeEnum.datetime }
         ];
         var resultsTable = {
             id: "results", alias: "Results Data", columns: results_cols
         };
-
         // Schema for teams data
         var teams_cols = [
             { id: "teamId", alias: "Team ID", dataType: tableau.dataTypeEnum.int },
@@ -35,7 +34,6 @@
         var teamsTable = {
             id: "teams", alias: "Teams Data", columns: teams_cols
         };
-
         // Schema for divisions data
         var divisions_cols = [
             { id: "code", alias: "Code", dataType: tableau.dataTypeEnum.string },
@@ -44,7 +42,6 @@
         var divisionsTable = {
             id: "divisions", alias: "Divisions Data", columns: divisions_cols
         };
-
         // Schema for legs data
         var legs_cols = [
             { id: "code", alias: "Code", dataType: tableau.dataTypeEnum.string },
@@ -54,7 +51,22 @@
         var legsTable = {
             id: "legs", alias: "Legs Data", columns: legs_cols
         };
-
+        // // Create a promise to get our Standard Connections List from a JSON file. This increases code readability since we no longer need to define the lengthy object within our javascript itself.
+        // var standardConnections = new Promise(function (resolve, reject) {
+        //     loadJSON("skiToSeaDataJoins", function (json) {
+        //         var obj = JSON.parse(json);
+        //         var connectionList = [];
+        //         for (var connection in obj.connections) {
+        //             connectionList.push(obj.connections[connection]);
+        //         }
+        //         resolve(connectionList);
+        //     }, true);
+        // });
+        // // Once all our promises are resolved, we can call the schemaCallback to send this info to Tableau
+        // Promise.all(
+        //     [resultsTable, teamsTable, divisionsTable, legsTable, standardConnections]).then(function (data) {
+        //         schemaCallback(data[0], data[1], data[2], data[3], data[4]);
+        //     });
         schemaCallback([resultsTable, teamsTable, divisionsTable, legsTable]);
     };
 
@@ -64,7 +76,6 @@
         var url_dev = "http://localhost:3333/";
         var tableData = [];
         var patches = JSON.parse(tableau.connectionData).patches;
-
         patches = patches.map(function (item) {
             var url = url_dev + item;
             // var url = url_beg + item + url_end;
@@ -75,13 +86,14 @@
                     divisions = resp.divisions,
                     legs = resp.legs,
                     tableData = [];
-
-                if (table.tableInfo.id == "results") {
-                    console.log(results);
+                    
+                    if (table.tableInfo.id == "results") {
+                    console.log(item, results);
                     var i, j
                     for (i in results) {
                         for (j in results[i]) {
                             tableData.push({
+                                "year": item,
                                 "leg": i,
                                 "pa": results[i][j].pa,
                                 "dq": results[i][j].dq,
@@ -113,51 +125,6 @@
                         }
                     }
                 }
-                // a way to visualize the race teams in one line, though there is a duplication issue, and also an output issue with this method when there is no racer, so it is not a preferred method
-                // if (table.tableInfo.id == "teams") {
-                //     console.log(teams);
-                //     var i, j;
-                //     for (i in teams) {
-                //         for (j in teams[i].rs.ca) {
-                //             if (!teams[i].rs.ca.hasOwnProperty(j)) {
-                //                 continue;
-                //             }
-                //             for (j in teams[i].rs.rb) {
-                //                 for (j in teams[i].rs.ru) {
-                //                     for (j in teams[i].rs.xc) {
-                //                         for (j in teams[i].rs.dh) {
-                //                             for (j in teams[i].rs.ka) {
-                //                                 for (j in teams[i].rs.mb) {
-                //                                     tableData.push({
-                //                                         "teamId": i,
-                //                                         "tn": teams[i].tn,
-                //                                         "dc": teams[i].dc,
-                //                                         "ca1_n": teams[i].rs.ca[0].n,
-                //                                         "ca1_g": teams[i].rs.ca[0].g,
-                //                                         "ca2_n": teams[i].rs.ca[1].n,
-                //                                         "ca2_g": teams[i].rs.ca[1].g,
-                //                                         "rb_n": teams[i].rs.rb[j].n,
-                //                                         "rb_g": teams[i].rs.rb[j].g,
-                //                                         "ru_n": teams[i].rs.ru[j].n,
-                //                                         "ru_g": teams[i].rs.ru[j].g,
-                //                                         "xc_n": teams[i].rs.xc[j].n,
-                //                                         "xc_g": teams[i].rs.xc[j].g,
-                //                                         "dh_n": teams[i].rs.dh[j].n,
-                //                                         "dh_g": teams[i].rs.dh[j].g,
-                //                                         "ka_n": teams[i].rs.ka[j].n,
-                //                                         "ka_g": teams[i].rs.ka[j].g,
-                //                                         "mb_n": teams[i].rs.mb[j].n,
-                //                                         "mb_g": teams[i].rs.mb[j].g
-                //                                     });
-                //                                 }
-                //                             }
-                //                         }
-                //                     }
-                //                 }
-                //             }
-                //         }
-                //     }
-                // }
                 if (table.tableInfo.id == "divisions") {
                     console.log(divisions);
                     var i;
@@ -190,20 +157,32 @@
     tableau.registerConnector(myConnector);
 })();
 
-$(document).ready(function () {
+// Helper function that loads a json and a callback to call once that file is loaded
+function loadJSON(path, cb, isLocal) {
+    var obj = new XMLHttpRequest();
+    obj.overrideMimeType("application/json");
+    if (isLocal) {
+        obj.open("GET", "./json/" + path + ".json", true);
+    }
+    obj.onreadystatechange = function () {
+        if (obj.readyState == 4 && obj.status == "200") {
+            cb(obj.responseText);
+        }
+    }
+    obj.send(null);
+};
 
+$(document).ready(function () {
     $("#getracedata").click(function () {
         // Get selected patch versions from web form.
         var patches = [];
         $('#patches :selected').each(function () {
             patches.push($(this).text())
         });
-
         // Store patches in connection data object to build url in myConnector.getData.
         var conn_data = {
             patches: patches,
         };
-
         tableau.connectionData = JSON.stringify(conn_data);
         tableau.connectionName = "Ski to Sea Race Results Data";
         tableau.submit();
